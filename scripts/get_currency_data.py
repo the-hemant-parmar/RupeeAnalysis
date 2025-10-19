@@ -9,9 +9,8 @@ def get_currency_data(days: int = 365):
 
     if os.path.exists(DATA_PATH):
         df = pd.read_csv(DATA_PATH, parse_dates=["Date"])
-        df = df.drop(columns=["CNY_INR"])
         # Drop the first row if it's headers repeated as data
-        df = df.iloc[1:]
+        df = df.iloc[1:days]
         df = df.astype(
             {
                 "Date": str,

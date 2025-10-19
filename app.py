@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from scripts.get_currency_data import get_currency_data
-from scripts.metrics import calculate_rupee_strength
+from scripts.metrics import calculate_rupee_strength, calculate_normalized_change
 
 
 # Streamlit App Configuration
@@ -50,7 +50,7 @@ metric_text = "strengthened 💪" if rsm < 0 else "weakened 📉"
 st.metric(
     label="Overall Rupee Strength Metric (RSM)",
     value=f"{rsm:.2f}%",
-    delta=f"Rupee has {metric_text} on average over the selected period",
+    delta=f"Rupee has {metric_text} on average over the last {days} day",
 )
 
 st.caption(
@@ -63,7 +63,43 @@ while a **positive value** indicates weakening.
 )
 
 # Charts
+st.subheader("📈 Normalized change in INR compared to major currencies")
+
+norm = calculate_normalized_change(df)
+try:
+    fig = px.line(
+        norm,
+        x="Date",
+        y=norm.columns[1:],  # all except Date
+        title="Rupee Performance vs Major Currencies (Base = 100)",
+        labels={"value": "Index (Base=100)", "Date": "Date"},
+    )
+    fig.update_layout(
+        yaxis_title="Rupee Value Index", legend_title="Currency", hovermode="x unified"
+    )
+    fig.add_hline(
+        y=100, line_dash="dot", line_color="gray", annotation_text="Base Level"
+    )
+    st.plotly_chart(fig, use_container_width=True)
+except Exception as e:
+    st.warning(f"Could not plot Normalized data: {e}")
+
+st.markdown("---")
+
+# Charts
 st.subheader("📈 INR Exchange Rate Trends")
+
+cols = [col for col in df.columns if col != "Date"]
+try:
+    fig = px.line(
+        df,
+        x="Date",
+        y=cols,
+        title=f"Values of currencies wrt INR",
+    )
+    st.plotly_chart(fig, use_container_width=True)
+except Exception as e:
+    st.warning(f"Could not plot Normalized data: {e}")
 
 for col in df.columns:
     if col != "Date":
