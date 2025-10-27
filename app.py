@@ -40,6 +40,13 @@ st.sidebar.markdown(
 with st.spinner("Fetching currency data..."):
     df = get_currency_data(days)
 
+if df is None:
+    st.error(
+        "❌ Currency data file not found. "
+        "Please run the data fetching notebook first to generate the data."
+    )
+    st.stop()
+
 st.success("Data loaded successfully!")
 
 
