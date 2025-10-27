@@ -23,17 +23,6 @@ __pycache__/
 **/.streamlit/static/
 
 # ===========================
-# Data & Artifacts
-# ===========================
-data/
-*.json
-*.xlsx
-*.db
-*.sqlite
-*.parquet
-*.zip
-
-# ===========================
 # IDE / OS files
 # ===========================
 # VSCode
