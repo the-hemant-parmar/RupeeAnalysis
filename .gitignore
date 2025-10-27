@@ -26,7 +26,6 @@ __pycache__/
 # Data & Artifacts
 # ===========================
 data/
-*.csv
 *.json
 *.xlsx
 *.db

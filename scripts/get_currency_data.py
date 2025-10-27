@@ -1,11 +1,13 @@
 import pandas as pd
 import os
+from scripts.fetch_data import fetch_data
 
 DATA_PATH = "data/currency_data.csv"
 
 
 def get_currency_data(days: int = 365):
     """Return cached data."""
+    fetch_data()
 
     if os.path.exists(DATA_PATH):
         df = pd.read_csv(DATA_PATH, parse_dates=["Date"])
