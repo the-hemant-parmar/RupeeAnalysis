@@ -5,7 +5,15 @@ DATA_PATH = "data/currency_data.csv"
 
 
 def get_currency_data(days: int = 365):
-    """Return cached data."""
+    """
+    Load cached currency exchange rates from the local CSV and return up to `days` rows.
+    
+    Parameters:
+    	days (int): Number of rows to include from the file, starting after the first row (default 365).
+    
+    Returns:
+    	pd.DataFrame or None: DataFrame containing columns `Date`, `USD_INR`, `EUR_INR`, `JPY_INR`, and `GBP_INR` (with `Date` as string and the currency columns as float) when the data file exists; `None` if the file is missing.
+    """
 
     if os.path.exists(DATA_PATH):
         df = pd.read_csv(DATA_PATH, parse_dates=["Date"])
