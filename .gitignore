@@ -1,0 +1,53 @@
+# ===========================
+# Python & Virtual Environment
+# ===========================
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+.env
+.env.*
+
+# ===========================
+# Streamlit Specific
+# ===========================
+# Streamlit’s config or temporary cache
+.streamlit/
+.streamlit/secrets.toml
+.cache/
+# Session state cache files
+**/.streamlit/cache/
+**/.streamlit/static/
+
+# ===========================
+# Data & Artifacts
+# ===========================
+data/
+*.csv
+*.json
+*.xlsx
+*.db
+*.sqlite
+*.parquet
+*.zip
+
+# ===========================
+# IDE / OS files
+# ===========================
+# VSCode
+.vscode/
+# JetBrains / PyCharm
+.idea/
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ===================
